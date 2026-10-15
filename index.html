@@ -1,0 +1,137 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Meu Terço Personalizado</title>
+<style>
+:root{--rosa:#a66b78;--fundo:#fffaf7;--texto:#453638}
+*{box-sizing:border-box}
+body{margin:0;background:var(--fundo);color:var(--texto);font-family:Arial,sans-serif}
+header{text-align:center;padding:28px 16px;background:#f2e3e3}
+header h1{margin:0 0 8px;font-family:Georgia,serif}
+header p{margin:0}
+main{max-width:900px;margin:auto;padding:18px}
+section{background:white;border:1px solid #eadcda;border-radius:14px;padding:18px;margin-bottom:16px}
+h2{font-size:19px;margin-top:0}
+label{display:block;font-weight:bold;margin:14px 0 7px}
+select,input{width:100%;padding:12px;border:1px solid #d8c7c5;border-radius:8px;background:white;font-size:16px}
+.preview{display:flex;justify-content:center;align-items:center;min-height:230px;background:#fffaf7;border-radius:12px}
+.preview svg{width:100%;max-width:330px;height:260px}
+button{width:100%;border:0;border-radius:9px;padding:14px;background:var(--rosa);color:white;font-size:16px;font-weight:bold;cursor:pointer;margin-top:12px}
+button:hover{opacity:.9}
+.small{font-size:13px;color:#76676a;line-height:1.5}
+#resumo{white-space:pre-line;line-height:1.7}
+footer{text-align:center;padding:24px;font-size:13px}
+</style>
+</head>
+<body>
+<header>
+  <h1>Meu Terço Personalizado</h1>
+  <p>Monte uma peça especial, escolhida por você ♥</p>
+</header>
+<main>
+<section>
+  <h2>✨ Veja sua montagem</h2>
+  <div class="preview"><svg id="desenho" viewBox="0 0 320 260" role="img" aria-label="Prévia ilustrativa do terço"></svg></div>
+  <p class="small">Prévia ilustrativa. O modelo final será confirmado no orçamento.</p>
+</section>
+<section>
+  <h2>🌸 Escolha seus componentes</h2>
+  <label for="tipo">Tipo de peça</label>
+  <select id="tipo">
+    <option>Terço tradicional</option>
+    <option>Dezena de bolso</option>
+  </select>
+  <label for="cruz">Cruz</label>
+  <select id="cruz">
+    <option value="CR001">CR001 — Cruz prateada</option>
+    <option value="CR002">CR002 — Cruz dourada</option>
+    <option value="CR003">CR003 — Cruz trabalhada</option>
+  </select>
+  <label for="entremeio">Entremeio</label>
+  <select id="entremeio">
+    <option value="EN001">EN001 — Nossa Senhora</option>
+    <option value="EN002">EN002 — Sagrado Coração</option>
+    <option value="EN003">EN003 — Espírito Santo</option>
+  </select>
+  <label for="contas">Contas e miçangas</label>
+  <select id="contas">
+    <option value="MI001">MI001 — Pérola branca</option>
+    <option value="MI002">MI002 — Azul</option>
+    <option value="MI003">MI003 — Rosa</option>
+    <option value="MI004">MI004 — Cristal transparente</option>
+    <option value="MI005">MI005 — Pérola lilás</option>
+  </select>
+  <label for="acabamento">Acabamento</label>
+  <select id="acabamento">
+    <option>Prateado</option>
+    <option>Dourado</option>
+  </select>
+  <label for="nome">Seu nome</label>
+  <input id="nome" placeholder="Como podemos chamar você?">
+  <label for="observacoes">Observações</label>
+  <input id="observacoes" placeholder="Ex.: é para presente">
+</section>
+<section>
+  <h2>📝 Resumo do pedido</h2>
+  <div id="resumo"></div>
+  <button id="enviar">Solicitar orçamento pelo WhatsApp</button>
+  <p class="small">O pedido só será enviado quando você confirmar a mensagem no WhatsApp. O preço e a disponibilidade serão combinados com você.</p>
+</section>
+</main>
+<footer>Feito com carinho ♥ | Terços personalizados</footer>
+<script>
+const $=id=>document.getElementById(id);
+const cores={
+ MI001:"#f1e6d3",MI002:"#739bd2",MI003:"#e6a3b5",
+ MI004:"#cce9ed",MI005:"#b9a0d7"
+};
+function atualizar(){
+ const tipo=$("tipo").value;
+ const cruz=$("cruz").value;
+ const ent=$("entremeio").value;
+ const conta=$("contas").value;
+ const acabamento=$("acabamento").value;
+ const cor=cores[conta];
+ const metal=acabamento==="Dourado"?"#bd9145":"#aab0b8";
+ let s="";
+ // Desenho ilustrativo em formato de terço
+ for(let i=0;i<24;i++){
+   const a=(-Math.PI/2)+(i/24)*Math.PI*2;
+   const x=160+76*Math.cos(a),y=105+82*Math.sin(a);
+   s+=`<circle cx="${x}" cy="${y}" r="6" fill="${cor}" stroke="#b9a8a0" stroke-width="1"/>`;
+ }
+ s+=`<path d="M160 187 L160 211" stroke="${metal}" stroke-width="4" stroke-linecap="round"/>`;
+ s+=`<circle cx="160" cy="184" r="8" fill="${cor}" stroke="${metal}" stroke-width="2"/>`;
+ s+=`<circle cx="160" cy="202" r="6" fill="${cor}" stroke="${metal}" stroke-width="2"/>`;
+ s+=`<g stroke="${metal}" stroke-width="5" stroke-linecap="round">
+ <path d="M160 211 V245 M148 222 H172"/></g>`;
+ s+=`<g fill="${metal}"><circle cx="160" cy="163" r="8"/></g>`;
+ s+=`<text x="160" y="15" text-anchor="middle" font-size="10" fill="#76676a">${tipo}</text>`;
+ $("desenho").innerHTML=s;
+ $("resumo").textContent=
+ "Tipo: "+tipo+
+ "\nCruz: "+cruz+
+ "\nEntremeio: "+ent+
+ "\nContas: "+conta+
+ "\nAcabamento: "+acabamento+
+ "\nNome: "+($("nome").value.trim()||"Não informado")+
+ "\nObservações: "+($("observacoes").value.trim()||"Nenhuma");
+}
+document.querySelectorAll("select,input").forEach(el=>el.addEventListener("input",atualizar));
+$("enviar").addEventListener("click",()=>{
+ const mensagem="Olá! Gostaria de solicitar um orçamento para meu terço personalizado.\n\n"+$("resumo").textContent;
+ // Troque pelo seu número com código do país e DDD.
+ const numero="55DDDNÚMERO";
+ if(numero.includes("DDD")||numero.includes("NÚMERO")){
+   alert("O catálogo está funcionando! Para abrir seu WhatsApp, ainda precisamos configurar seu número no código.");
+   return;
+ }
+ window.open("https://wa.me/"+numero+"?text="+encodeURIComponent(mensagem),"_blank");
+});
+atualizar();
+</script>
+</body>
+</html>

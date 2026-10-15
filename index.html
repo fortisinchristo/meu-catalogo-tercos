@@ -57,13 +57,71 @@ footer{text-align:center;padding:24px;font-size:13px}
     <option value="EN003">EN003 — Espírito Santo</option>
   </select>
   <label for="contas">Contas e miçangas</label>
-  <select id="contas">
-    <option value="MI001">MI001 — Pérola branca</option>
-    <option value="MI002">MI002 — Azul</option>
-    <option value="MI003">MI003 — Rosa</option>
-    <option value="MI004">MI004 — Cristal transparente</option>
-    <option value="MI005">MI005 — Pérola lilás</option>
-  </select>
+<select id="contas">
+  <option value="cristal-amarela.jpg">Cristal amarelo</option>
+  <option value="cristal-amarelo-furta.jpg">Cristal amarelo furta-cor</option>
+  <option value="cristal-amarelo-transp.jpg">Cristal amarelo transparente</option>
+  <option value="cristal-azul-aco.jpg">Cristal azul-aço</option>
+  <option value="cristal-azul-agua.jpg">Cristal azul-água</option>
+  <option value="cristal-azul-bic.jpg">Cristal azul-bic</option>
+  <option value="cristal-azul-celetes.jpg">Cristal azul-celeste</option>
+  <option value="cristal-azul-claro-leitoso.jpg">Cristal azul-claro leitoso</option>
+  <option value="cristal-azul-claro.jpg">Cristal azul-claro</option>
+  <option value="cristal-azul-marinho.jpg">Cristal azul-marinho</option>
+  <option value="cristal-azul-royal.jpg">Cristal azul-royal</option>
+  <option value="cristal-azul-transp.jpg">Cristal azul transparente</option>
+  <option value="cristal-azul-turquesa.jpg">Cristal azul-turquesa</option>
+  <option value="cristal-bege.jpg">Cristal bege</option>
+  <option value="cristal-bordo.jpg">Cristal bordô</option>
+  <option value="cristal-branco-furta.jpg">Cristal branco furta-cor</option>
+  <option value="cristal-branco.jpg">Cristal branco</option>
+  <option value="cristal-caqui.jpg">Cristal cáqui</option>
+  <option value="cristal-cinza-metalizado.jpg">Cristal cinza metalizado</option>
+  <option value="cristal-cinza-transparente.jpg">Cristal cinza transparente</option>
+  <option value="cristal-cinza.jpg">Cristal cinza</option>
+  <option value="cristal-colorido-leitoso.jpg">Cristal colorido leitoso</option>
+  <option value="cristal-colorido-transp.jpg">Cristal colorido transparente</option>
+  <option value="cristal-coral-claro.jpg">Cristal coral-claro</option>
+  <option value="cristal-doce-de-leite.jpg">Cristal doce de leite</option>
+  <option value="cristal-dourado.jpg">Cristal dourado</option>
+  <option value="cristal-fade.jpg">Cristal degradê</option>
+  <option value="cristal-fucsia.jpg">Cristal fúcsia</option>
+  <option value="cristal-grafite.jpg">Cristal grafite</option>
+  <option value="cristal-laranja-furta.jpg">Cristal laranja furta-cor</option>
+  <option value="cristal-laranja.jpg">Cristal laranja</option>
+  <option value="cristal-lilas-leitoso.jpg">Cristal lilás leitoso</option>
+  <option value="cristal-lilas.jpg">Cristal lilás</option>
+  <option value="cristal-magenta.jpg">Cristal magenta</option>
+  <option value="cristal-marrom.jpg">Cristal marrom</option>
+  <option value="cristal-mel.jpg">Cristal mel</option>
+  <option value="cristal-nude.jpg">Cristal nude</option>
+  <option value="cristal-opala.jpg">Cristal opala</option>
+  <option value="cristal-prateado.jpg">Cristal prateado</option>
+  <option value="cristal-preto.jpg">Cristal preto</option>
+  <option value="cristal-rosa-chiclete.jpg">Cristal rosa-chiclete</option>
+  <option value="cristal-rosa-trsnp.jpg">Cristal rosa transparente</option>
+  <option value="cristal-rosa.jpg">Cristal rosa</option>
+  <option value="cristal-roxo-fucsia.jpg">Cristal roxo-fúcsia</option>
+  <option value="cristal-salmao-transp.jpg">Cristal salmão transparente</option>
+  <option value="cristal-salmao.jpg">Cristal salmão</option>
+  <option value="cristal-transp-furta.jpg">Cristal transparente furta-cor</option>
+  <option value="cristal-uva.jpg">Cristal uva</option>
+  <option value="cristal-verde-claro.jpg">Cristal verde-claro</option>
+  <option value="cristal-verde-limao.jpg">Cristal verde-limão</option>
+  <option value="cristal-verde-musgo.jpg">Cristal verde-musgo</option>
+  <option value="cristal-verde.jpg">Cristal verde</option>
+  <option value="cristal-vermelho.jpg">Cristal vermelho</option>
+</select>
+
+<div style="text-align:center;margin-top:12px">
+  <img
+    id="fotoConta"
+    src="cristal-branco.jpg"
+    alt="Foto do cristal selecionado"
+    style="width:160px;height:160px;object-fit:contain;border-radius:10px"
+  >
+  <p id="nomeConta" class="small">Cristal branco</p>
+</div>
   <label for="acabamento">Acabamento</label>
   <select id="acabamento">
     <option>Prateado</option>
@@ -83,55 +141,133 @@ footer{text-align:center;padding:24px;font-size:13px}
 </main>
 <footer>Feito com carinho ♥ | Terços personalizados</footer>
 <script>
-const $=id=>document.getElementById(id);
-const cores={
- MI001:"#f1e6d3",MI002:"#739bd2",MI003:"#e6a3b5",
- MI004:"#cce9ed",MI005:"#b9a0d7"
-};
-function atualizar(){
- const tipo=$("tipo").value;
- const cruz=$("cruz").value;
- const ent=$("entremeio").value;
- const conta=$("contas").value;
- const acabamento=$("acabamento").value;
- const cor=cores[conta];
- const metal=acabamento==="Dourado"?"#bd9145":"#aab0b8";
- let s="";
- // Desenho ilustrativo em formato de terço
- for(let i=0;i<24;i++){
-   const a=(-Math.PI/2)+(i/24)*Math.PI*2;
-   const x=160+76*Math.cos(a),y=105+82*Math.sin(a);
-   s+=`<circle cx="${x}" cy="${y}" r="6" fill="${cor}" stroke="#b9a8a0" stroke-width="1"/>`;
- }
- s+=`<path d="M160 187 L160 211" stroke="${metal}" stroke-width="4" stroke-linecap="round"/>`;
- s+=`<circle cx="160" cy="184" r="8" fill="${cor}" stroke="${metal}" stroke-width="2"/>`;
- s+=`<circle cx="160" cy="202" r="6" fill="${cor}" stroke="${metal}" stroke-width="2"/>`;
- s+=`<g stroke="${metal}" stroke-width="5" stroke-linecap="round">
- <path d="M160 211 V245 M148 222 H172"/></g>`;
- s+=`<g fill="${metal}"><circle cx="160" cy="163" r="8"/></g>`;
- s+=`<text x="160" y="15" text-anchor="middle" font-size="10" fill="#76676a">${tipo}</text>`;
- $("desenho").innerHTML=s;
- $("resumo").textContent=
- "Tipo: "+tipo+
- "\nCruz: "+cruz+
- "\nEntremeio: "+ent+
- "\nContas: "+conta+
- "\nAcabamento: "+acabamento+
- "\nNome: "+($("nome").value.trim()||"Não informado")+
- "\nObservações: "+($("observacoes").value.trim()||"Nenhuma");
+const $ = id => document.getElementById(id);
+
+function obterCor(nomeArquivo) {
+  const nome = nomeArquivo.toLowerCase();
+
+  const cores = {
+    amarela: "#e5c044",
+    amarelo: "#e5c044",
+    azul: "#438ac7",
+    bege: "#d9c3a0",
+    bordo: "#702c40",
+    branco: "#f3e9d7",
+    caqui: "#b8a477",
+    cinza: "#999999",
+    coral: "#f08072",
+    "doce-de-leite": "#b77a4c",
+    dourado: "#c9a13b",
+    fade: "#bb91bb",
+    fucsia: "#d62d83",
+    grafite: "#555555",
+    laranja: "#ed8b30",
+    lilas: "#bba2d9",
+    magenta: "#c72c82",
+    marrom: "#80543d",
+    mel: "#c89542",
+    nude: "#d8b6a2",
+    opala: "#c7d9d8",
+    prateado: "#b8bdc5",
+    preto: "#333333",
+    rosa: "#e69bb6",
+    roxo: "#8748a0",
+    salmao: "#e99686",
+    transp: "#b8dfe4",
+    uva: "#71418b",
+    verde: "#5b9b69",
+    vermelho: "#c93642"
+  };
+
+  if (nome.includes("furta")) return "#c6a9d8";
+  if (nome.includes("transp")) return "#b8dfe4";
+  if (nome.includes("leitoso")) return "#b8c9e5";
+  if (nome.includes("metalizado")) return "#aeb2bb";
+
+  const palavras = Object.keys(cores).sort((a, b) => b.length - a.length);
+
+  for (const palavra of palavras) {
+    if (nome.includes(palavra)) return cores[palavra];
+  }
+
+  return "#d8c9c5";
 }
-document.querySelectorAll("select,input").forEach(el=>el.addEventListener("input",atualizar));
-$("enviar").addEventListener("click",()=>{
- const mensagem="Olá! Gostaria de solicitar um orçamento para meu terço personalizado.\n\n"+$("resumo").textContent;
- // Troque pelo seu número com código do país e DDD.
- const numero="5535997089696";
- if(numero.includes("DDD")||numero.includes("NÚMERO")){
-   alert("O catálogo está funcionando! Para abrir seu WhatsApp, ainda precisamos configurar seu número no código.");
-   return;
- }
- window.open("https://wa.me/"+numero+"?text="+encodeURIComponent(mensagem),"_blank");
+
+function atualizar() {
+  const tipo = $("tipo").value;
+  const cruz = $("cruz").value;
+  const entremeio = $("entremeio").value;
+  const arquivo = $("contas").value;
+  const nomeConta = $("contas").selectedOptions[0].textContent;
+  const acabamento = $("acabamento").value;
+
+  const cor = obterCor(arquivo);
+  const metal = acabamento === "Dourado" ? "#bd9145" : "#aab0b8";
+
+  $("fotoConta").src = arquivo;
+  $("fotoConta").alt = nomeConta;
+  $("nomeConta").textContent = nomeConta;
+
+  let desenho = "";
+
+  for (let i = 0; i < 24; i++) {
+    const angulo = (-Math.PI / 2) + (i / 24) * Math.PI * 2;
+    const x = 160 + 76 * Math.cos(angulo);
+    const y = 105 + 82 * Math.sin(angulo);
+
+    desenho += `<circle cx="${x}" cy="${y}" r="6" fill="${cor}" stroke="#b9a8a0" stroke-width="1"/>`;
+  }
+
+  desenho += `
+    <path d="M160 187 L160 211" stroke="${metal}" stroke-width="4" stroke-linecap="round"/>
+    <circle cx="160" cy="184" r="8" fill="${cor}" stroke="${metal}" stroke-width="2"/>
+    <circle cx="160" cy="202" r="6" fill="${cor}" stroke="${metal}" stroke-width="2"/>
+    <g stroke="${metal}" stroke-width="5" stroke-linecap="round">
+      <path d="M160 211 V245 M148 222 H172"/>
+    </g>
+    <circle cx="160" cy="163" r="8" fill="${metal}"/>
+    <text x="160" y="15" text-anchor="middle" font-size="10" fill="#76676a">${tipo}</text>
+  `;
+
+  $("desenho").innerHTML = desenho;
+
+  $("resumo").textContent =
+    "Tipo: " + tipo +
+    "\nCruz: " + cruz +
+    "\nEntremeio: " + entremeio +
+    "\nContas: " + nomeConta +
+    "\nAcabamento: " + acabamento +
+    "\nNome: " + ($("nome").value.trim() || "Não informado") +
+    "\nObservações: " + ($("observacoes").value.trim() || "Nenhuma");
+}
+
+document.querySelectorAll("select, input").forEach(elemento => {
+  elemento.addEventListener("input", atualizar);
+  elemento.addEventListener("change", atualizar);
 });
+
+$("fotoConta").addEventListener("error", () => {
+  $("nomeConta").textContent =
+    "Não foi possível carregar a foto. Confira o nome do arquivo.";
+});
+
+$("enviar").addEventListener("click", () => {
+  atualizar();
+
+  const mensagem =
+    "Olá! Gostaria de solicitar um orçamento para meu terço personalizado.\n\n" +
+    $("resumo").textContent;
+
+  const numero = "5535997089696";
+
+  window.open(
+    "https://wa.me/" + numero + "?text=" + encodeURIComponent(mensagem),
+    "_blank"
+  );
+});
+
 atualizar();
+
 </script>
 </body>
 </html>

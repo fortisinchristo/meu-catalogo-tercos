@@ -210,13 +210,39 @@ function atualizar() {
 
   let desenho = "";
 
-  for (let i = 0; i < 24; i++) {
-    const angulo = (-Math.PI / 2) + (i / 24) * Math.PI * 2;
-    const x = 160 + 76 * Math.cos(angulo);
-    const y = 105 + 82 * Math.sin(angulo);
+ for (let i = 0; i < 24; i++) {
+  const angulo = (-Math.PI / 2) + (i / 24) * Math.PI * 2;
+  const x = 160 + 76 * Math.cos(angulo);
+  const y = 105 + 82 * Math.sin(angulo);
+  const id = "conta" + i;
 
-    desenho += `<circle cx="${x}" cy="${y}" r="6" fill="${cor}" stroke="#b9a8a0" stroke-width="1"/>`;
-  }
+  desenho += `
+    <defs>
+      <clipPath id="${id}">
+        <circle cx="${x}" cy="${y}" r="6"/>
+      </clipPath>
+    </defs>
+
+    <image
+      href="${arquivo}"
+      x="${x - 6}"
+      y="${y - 6}"
+      width="12"
+      height="12"
+      preserveAspectRatio="xMidYMid slice"
+      clip-path="url(#${id})"
+    />
+
+    <circle
+      cx="${x}"
+      cy="${y}"
+      r="6"
+      fill="none"
+      stroke="#b9a8a0"
+      stroke-width="1"
+    />
+  `;
+}
 
   desenho += `
     <path d="M160 187 L160 211" stroke="${metal}" stroke-width="4" stroke-linecap="round"/>
